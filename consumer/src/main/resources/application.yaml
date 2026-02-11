@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: notification-consumer
+  profiles:
+    active: local
+    include: event
+server:
+  port: 8081
