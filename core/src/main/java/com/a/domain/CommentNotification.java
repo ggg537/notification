@@ -3,8 +3,10 @@ package com.a.domain;
 import java.time.Instant;
 import lombok.Getter;
 import org.springframework.data.annotation.TypeAlias;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 @Getter
+@Document("notifications")
 @TypeAlias("CommentNotification")
 public class CommentNotification extends Notification{
 

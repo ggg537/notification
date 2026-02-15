@@ -1,8 +1,6 @@
-rootProject.name = 'notification'
+rootProject.name = 'sns-platform'
 include 'api'
 include 'consumer'
 include 'core'
-include 'api'
-include 'core'
-include 'consumer'
+include 'content'
 

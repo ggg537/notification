@@ -3,7 +3,9 @@ package com.a.domain;
 import java.time.Instant;
 import lombok.Getter;
 import org.springframework.data.annotation.TypeAlias;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document("notifications")
 @TypeAlias("FollowNotification")
 @Getter
 public class FollowNotification extends Notification{

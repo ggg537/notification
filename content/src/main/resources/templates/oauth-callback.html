@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default}">
+<head><title>소셜 로그인</title></head>
+<body>
+<div layout:fragment="content">
+    <div class="auth-layout">
+        <div class="auth-box">
+            <h1 id="statusTitle">로그인 중...</h1>
+            <div id="errorMsg" class="error-message"></div>
+            <p id="statusMsg" style="text-align:center;color:var(--text-secondary);font-size:14px;">
+                로그인을 완료하는 중입니다. 잠시만 기다려주세요.
+            </p>
+        </div>
+    </div>
+    <script src="/js/oauth-callback.js"></script>
+</div>
+</body>
+</html>

@@ -1,24 +1,21 @@
 package com.a.client;
 
 import com.a.domain.Comment;
-import java.time.Instant;
-import java.util.HashMap;
-import java.util.Map;
+import com.a.entity.CommentEntity;
+import com.a.repository.CommentJpaRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
 public class CommentClient {
 
-  private final Map<Long, Comment> comments = new HashMap<>();
+  private final CommentJpaRepository commentJpaRepository;
 
-  public CommentClient() {
-    comments.put(1L, new Comment(1L, 111L,"content1", Instant.now()));
-    comments.put(2L, new Comment(2L, 222L,"content2", Instant.now()));
-    comments.put(3L, new Comment(3L, 333L,"content3", Instant.now()));
-  }
-
-  public Comment getComment(Long id){
-    return comments.get(id);
+  public Comment getComment(Long id) {
+    CommentEntity entity = commentJpaRepository.findById(id).orElse(null);
+    if (entity == null) return null;
+    return new Comment(entity.getId(), entity.getUserId(), entity.getContent(), entity.getCreatedAt());
   }
 
 }

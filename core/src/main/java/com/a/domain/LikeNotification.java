@@ -4,8 +4,10 @@ import java.time.Instant;
 import java.util.List;
 import lombok.Getter;
 import org.springframework.data.annotation.TypeAlias;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 @Getter
+@Document("notifications")
 @TypeAlias("LikeNotification")
 public class LikeNotification extends Notification{
 

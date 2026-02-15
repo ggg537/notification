@@ -1,29 +1,27 @@
 package com.a.client;
 
 import com.a.domain.User;
-import java.util.HashMap;
-import java.util.Map;
+import com.a.entity.UserEntity;
+import com.a.repository.FollowRepository;
+import com.a.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 @Repository
+@RequiredArgsConstructor
 public class UserClient {
 
-  private final Map<Long, User> users = new HashMap<>();
+  private final UserRepository userRepository;
+  private final FollowRepository followRepository;
 
-  public UserClient() {
-    users.put(1L, new User(1L, "user1","profileImageUrl1"));
-    users.put(2L, new User(2L, "user2","profileImageUrl2"));
-    users.put(3L, new User(3L, "user3","profileImageUrl3"));
-    users.put(4L, new User(4L, "user4","profileImageUrl4"));
-    users.put(5L, new User(5L, "user5","profileImageUrl5"));
-  }
-
-  public User getUser(Long id){
-    return users.get(id);
+  public User getUser(Long id) {
+    UserEntity entity = userRepository.findById(id).orElse(null);
+    if (entity == null) return null;
+    return new User(entity.getId(), entity.getName(), entity.getProfileImageUrl());
   }
 
   public Boolean getIsFollowing(Long followerId, Long followedId) {
-    return true;
+    return followRepository.existsByFollowerIdAndFollowingId(followerId, followedId);
   }
 
 }

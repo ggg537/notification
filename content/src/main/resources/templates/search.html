@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default}">
+<head><title>검색</title></head>
+<body>
+<div layout:fragment="content">
+    <div class="app-layout">
+        <div class="main-content">
+            <div class="search-header">
+                <input type="text" id="searchInput" class="search-input-lg" placeholder="게시글, 사용자, #태그 검색..." autofocus>
+            </div>
+
+            <div class="feed-tabs" id="searchTabs">
+                <button class="tab active" data-tab="posts">게시글</button>
+                <button class="tab" data-tab="users">사용자</button>
+                <button class="tab" data-tab="tags">태그</button>
+            </div>
+
+            <div id="searchResults"></div>
+            <div class="loading-indicator hidden" id="loadingIndicator">로딩 중...</div>
+            <div class="empty-state hidden" id="emptyState">검색 결과가 없습니다.</div>
+        </div>
+
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-card">
+                <h3>트렌딩</h3>
+                <div id="trendingTags"></div>
+            </div>
+        </div>
+    </div>
+    <script src="/js/search.js"></script>
+</div>
+</body>
+</html>

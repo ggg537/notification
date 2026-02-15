@@ -1,23 +1,21 @@
 package com.a.client;
 
 import com.a.domain.Post;
-import java.util.HashMap;
-import java.util.Map;
+import com.a.entity.PostEntity;
+import com.a.repository.PostRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
 public class PostClient {
 
-  private final Map<Long, Post> posts = new HashMap<>();
+  private final PostRepository postRepository;
 
-  public PostClient() {
-    posts.put(1L, new Post(1L, 111L, "imageUrl1", "content1"));
-    posts.put(2L, new Post(2L, 222L, "imageUrl2", "content2"));
-    posts.put(3L, new Post(3L, 333L, "imageUrl3", "content3"));
-  }
-
-  public Post getPost(Long id){
-    return posts.get(id);
+  public Post getPost(Long id) {
+    PostEntity entity = postRepository.findById(id).orElse(null);
+    if (entity == null) return null;
+    return new Post(entity.getId(), entity.getUserId(), entity.getImageUrl(), entity.getContent());
   }
 
 }

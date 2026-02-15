@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default}">
+<head><title>피드</title></head>
+<body>
+<div layout:fragment="content">
+    <div class="app-layout">
+        <div class="main-content">
+            <div class="create-post" id="createPostBox">
+                <div class="create-post-top">
+                    <img id="createPostAvatar" class="create-post-avatar" src="" alt="">
+                    <textarea id="postContent" placeholder="무슨 생각을 하고 계세요?"></textarea>
+                </div>
+                <div class="image-preview" id="imagePreview">
+                    <img id="imagePreviewImg" src="" alt="">
+                    <button class="remove-image" onclick="removeImage()">&times;</button>
+                </div>
+                <div class="create-post-bottom">
+                    <div class="create-post-options">
+                        <label>
+                            <span>📷</span>
+                            <input type="file" id="postImage" accept="image/*" onchange="previewImage(this)">
+                        </label>
+                        <select id="postVisibility">
+                            <option value="PUBLIC">전체 공개</option>
+                            <option value="FOLLOWERS_ONLY">팔로워 전용</option>
+                            <option value="PRIVATE">나만 보기</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-primary btn-sm" onclick="createPost()">게시</button>
+                </div>
+            </div>
+
+            <div class="feed-tabs" id="feedTabs">
+                <button class="tab active" data-tab="all">전체</button>
+                <button class="tab" data-tab="following">팔로잉</button>
+                <button class="tab" data-tab="popular">인기</button>
+            </div>
+
+            <div id="feedList"></div>
+            <div class="loading-indicator hidden" id="loadingIndicator">로딩 중...</div>
+            <div class="empty-state hidden" id="emptyState">아직 게시글이 없습니다. 첫 번째 게시글을 작성해보세요!</div>
+        </div>
+
+        <div class="sidebar" id="sidebar"></div>
+    </div>
+    <script src="/js/feed.js"></script>
+</div>
+</body>
+</html>

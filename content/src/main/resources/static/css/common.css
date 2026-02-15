@@ -1,0 +1,298 @@
+/* ========== CSS 변수 (테마) ========== */
+:root {
+  --bg: #f5f5f3;
+  --card: #ffffff;
+  --border: #e8e8e4;
+  --text: #1a1a1a;
+  --text-secondary: #6b6b68;
+  --text-muted: #a8a8a4;
+  --accent: #5046e5;
+  --accent-light: rgba(80, 70, 229, 0.1);
+  --like: #e5453a;
+  --like-light: rgba(229, 69, 58, 0.1);
+  --save: #3b82f6;
+  --save-light: rgba(59, 130, 246, 0.1);
+  --followers-only: #2d9d5a;
+  --followers-only-light: rgba(45, 157, 90, 0.1);
+  --private: #e5453a;
+  --private-light: rgba(229, 69, 58, 0.1);
+  --input-bg: #f5f5f3;
+  --shadow: 0 1px 3px rgba(0,0,0,0.06);
+  --shadow-lg: 0 4px 12px rgba(0,0,0,0.08);
+  --nav-bg: rgba(255,255,255,0.82);
+}
+
+[data-theme="dark"] {
+  --bg: #0e0e10;
+  --card: #18181b;
+  --border: #27272a;
+  --text: #fafafa;
+  --text-secondary: #a1a1aa;
+  --text-muted: #52525b;
+  --accent: #818cf8;
+  --accent-light: rgba(129, 140, 248, 0.15);
+  --like: #f87171;
+  --like-light: rgba(248, 113, 113, 0.15);
+  --save: #60a5fa;
+  --save-light: rgba(96, 165, 250, 0.15);
+  --followers-only: #4ade80;
+  --followers-only-light: rgba(74, 222, 128, 0.15);
+  --private: #f87171;
+  --private-light: rgba(248, 113, 113, 0.15);
+  --input-bg: #27272a;
+  --shadow: 0 1px 3px rgba(0,0,0,0.3);
+  --shadow-lg: 0 4px 12px rgba(0,0,0,0.4);
+  --nav-bg: rgba(24,24,27,0.82);
+}
+
+/* ========== 리셋 & 기본 ========== */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  min-height: 100vh;
+  padding-bottom: 90px;
+  transition: background 0.2s, color 0.2s;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+input, textarea, select, button {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+/* ========== 레이아웃 ========== */
+.app-layout {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px 16px;
+  display: flex;
+  gap: 24px;
+}
+
+.main-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.sidebar {
+  width: 260px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .app-layout {
+    flex-direction: column;
+    padding: 16px 12px;
+  }
+  .sidebar {
+    width: 100%;
+    order: -1;
+  }
+}
+
+/* ========== 플로팅 네비게이션 ========== */
+.floating-nav {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background: var(--nav-bg);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--border);
+  border-radius: 50px;
+  box-shadow: var(--shadow-lg);
+  z-index: 1000;
+}
+
+.floating-nav .nav-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 50px;
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s;
+  position: relative;
+  white-space: nowrap;
+}
+
+.floating-nav .nav-item:hover {
+  background: var(--accent-light);
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.floating-nav .nav-item.active {
+  background: var(--text);
+  color: var(--bg);
+}
+
+.floating-nav .nav-item .notif-dot {
+  width: 5px;
+  height: 5px;
+  background: var(--like);
+  border-radius: 50%;
+  display: none;
+  position: absolute;
+  top: 8px;
+  right: 10px;
+}
+
+.floating-nav .nav-item .notif-dot.show {
+  display: block;
+}
+
+.floating-nav .theme-toggle {
+  padding: 8px 12px;
+  border-radius: 50px;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.floating-nav .theme-toggle:hover {
+  background: var(--accent-light);
+  color: var(--accent);
+}
+
+/* ========== 인증 레이아웃 ========== */
+.auth-layout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.auth-box {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 48px 40px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: var(--shadow);
+}
+
+.auth-box h1 {
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.auth-box .form-group {
+  margin-bottom: 16px;
+}
+
+.auth-box input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--input-bg);
+  color: var(--text);
+  font-size: 14px;
+  transition: border-color 0.2s;
+}
+
+.auth-box input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.auth-box .btn-primary {
+  width: 100%;
+  margin-top: 8px;
+}
+
+.auth-box .auth-link {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+/* ========== 타이포그래피 ========== */
+.page-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+/* ========== 에러 / 메시지 ========== */
+.error-message {
+  color: var(--like);
+  font-size: 13px;
+  text-align: center;
+  margin-bottom: 12px;
+  display: none;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 48px 20px;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+/* ========== 로딩 ========== */
+.loading-indicator {
+  text-align: center;
+  padding: 24px;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.loading-indicator.hidden {
+  display: none;
+}
+
+/* ========== 스크롤바 (다크 테마) ========== */
+[data-theme="dark"] ::-webkit-scrollbar {
+  width: 8px;
+}
+[data-theme="dark"] ::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
