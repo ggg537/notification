@@ -1,7 +1,7 @@
 package com.a.notification.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,14 +18,14 @@ public class UserNotificationListResponse {
   private boolean hasNext;
 
   @Schema(description = "다음 페이지 요청시 전달할 pivot 파라미터")
-  private Instant pivot;
+  private LocalDateTime pivot;
 
   public static UserNotificationListResponse of(GetUserNotificationsResult result) {
     List<UserNotificationResponse> notifications = result.getNotifications().stream()
         .map(UserNotificationResponse::of)
         .toList();
 
-    Instant pivot = (result.isHasNext() && !notifications.isEmpty())
+    LocalDateTime pivot = (result.isHasNext() && !notifications.isEmpty())
         ? notifications.getLast().getOccurredAt() : null;
 
     return new UserNotificationListResponse(

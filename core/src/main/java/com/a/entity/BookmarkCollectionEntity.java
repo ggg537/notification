@@ -2,12 +2,11 @@ package com.a.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import java.time.Instant;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "bookmark_collections")
 @Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -15,19 +14,19 @@ public class BookmarkCollectionEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id;                    // 컬렉션 고유 식별자
 
     @Column(nullable = false)
-    private Long userId;
+    private Long userId;                // 컬렉션 소유자 ID
 
     @Column(nullable = false, length = 100)
-    private String name;
+    private String name;                // 컬렉션 이름
 
     @Column(nullable = false, updatable = false)
-    private Instant createdAt;
+    private LocalDateTime createdAt;    // 생성 시간
 
     @PrePersist
     public void prePersist() {
-        this.createdAt = Instant.now();
+        this.createdAt = LocalDateTime.now();
     }
 }

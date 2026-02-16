@@ -7,8 +7,7 @@ import com.a.client.PostClient;
 import com.a.domain.FollowNotification;
 import com.a.domain.NotificationType;
 import com.a.event.FollowEvent;
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
+import java.time.LocalDateTime;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -27,7 +26,7 @@ public class FollowAddTask {
 
   private FollowNotification createFollowNotification(FollowEvent event) {
 
-    Instant now = Instant.now();
+    LocalDateTime now = LocalDateTime.now();
 
     return new FollowNotification(
         NotificationIdGenerator.generate(),
@@ -36,7 +35,7 @@ public class FollowAddTask {
         event.getCreatedAt(),
         now,
         now,
-        now.plus(90, ChronoUnit.DAYS),
+        now.plusDays(90),
         event.getUserId()
     );
   }

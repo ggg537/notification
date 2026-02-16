@@ -1,7 +1,7 @@
 package com.a.notification.dto;
 
 import com.a.domain.NotificationType;
-import java.time.Instant;
+import java.time.LocalDateTime;
 import lombok.Getter;
 
 @Getter
@@ -15,8 +15,8 @@ public class ConvertedCommentNotification extends ConvertedNotification {
   public ConvertedCommentNotification(
       String id,
       NotificationType type,
-      Instant occurredAt,
-      Instant lastUpdatedAt,
+      LocalDateTime occurredAt,
+      LocalDateTime lastUpdatedAt,
       String userName,
       String userProfileImageUrl,
       String comment,

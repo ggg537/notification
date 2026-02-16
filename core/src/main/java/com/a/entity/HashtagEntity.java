@@ -6,7 +6,6 @@ import lombok.*;
 @Entity
 @Table(name = "hashtags")
 @Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder

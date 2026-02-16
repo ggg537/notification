@@ -12,7 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.Instant;
+import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.UUID;
 
@@ -48,7 +48,7 @@ public class AuthService {
             EmailVerificationTokenEntity.builder()
                 .userId(saved.getId())
                 .token(token)
-                .expiresAt(Instant.now().plus(24, ChronoUnit.HOURS))
+                .expiresAt(LocalDateTime.now().plusHours(24))
                 .build()
         );
         emailService.sendVerificationEmail(email, token);
@@ -100,7 +100,7 @@ public class AuthService {
         RefreshTokenEntity tokenEntity = refreshTokenRepository.findByToken(refreshToken)
             .orElseThrow(() -> new IllegalArgumentException("Invalid refresh token"));
 
-        if (tokenEntity.getExpiresAt().isBefore(Instant.now())) {
+        if (tokenEntity.getExpiresAt().isBefore(LocalDateTime.now())) {
             refreshTokenRepository.delete(tokenEntity);
             throw new IllegalArgumentException("Refresh token expired");
         }
@@ -137,7 +137,7 @@ public class AuthService {
         if (tokenEntity.isUsed()) {
             throw new IllegalArgumentException("Token already used");
         }
-        if (tokenEntity.getExpiresAt().isBefore(Instant.now())) {
+        if (tokenEntity.getExpiresAt().isBefore(LocalDateTime.now())) {
             throw new IllegalArgumentException("Token expired");
         }
 
@@ -167,7 +167,7 @@ public class AuthService {
             EmailVerificationTokenEntity.builder()
                 .userId(userId)
                 .token(token)
-                .expiresAt(Instant.now().plus(24, ChronoUnit.HOURS))
+                .expiresAt(LocalDateTime.now().plusHours(24))
                 .build()
         );
         emailService.sendVerificationEmail(user.getEmail(), token);
@@ -198,7 +198,7 @@ public class AuthService {
                 PasswordResetTokenEntity.builder()
                     .userId(user.getId())
                     .token(token)
-                    .expiresAt(Instant.now().plus(1, ChronoUnit.HOURS))
+                    .expiresAt(LocalDateTime.now().plusHours(1))
                     .build()
             );
             emailService.sendPasswordResetEmail(email, token);
@@ -214,7 +214,7 @@ public class AuthService {
         if (tokenEntity.isUsed()) {
             throw new IllegalArgumentException("Token already used");
         }
-        if (tokenEntity.getExpiresAt().isBefore(Instant.now())) {
+        if (tokenEntity.getExpiresAt().isBefore(LocalDateTime.now())) {
             throw new IllegalArgumentException("Token expired");
         }
 
@@ -240,7 +240,7 @@ public class AuthService {
         RefreshTokenEntity entity = RefreshTokenEntity.builder()
             .userId(userId)
             .token(token)
-            .expiresAt(Instant.now().plusMillis(expirationMs))
+            .expiresAt(LocalDateTime.now().plus(expirationMs, ChronoUnit.MILLIS))
             .build();
         refreshTokenRepository.save(entity);
 

@@ -12,11 +12,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
-import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import static com.a.domain.NotificationType.COMMENT;
-import static java.time.temporal.ChronoUnit.DAYS;
 import static org.junit.jupiter.api.Assertions.*;
 
 //@SpringBootTest
@@ -31,13 +30,13 @@ class NotificationRepositoryIntegrationTest extends IntegrationTest {
   private final long writerId = 4L;
   private final long commentId = 5L;
   private final String comment = "comment";
-  private final Instant now = Instant.now();
-  private final Instant ninetyDaysAfter = Instant.now().plus(90, DAYS);
+  private final LocalDateTime now = LocalDateTime.now();
+  private final LocalDateTime ninetyDaysAfter = LocalDateTime.now().plusDays(90);
 
   @BeforeEach
   void setUp() {
     for (int i = 1; i <= 5; i++) {
-      Instant occurredAt = now.minus(i, DAYS);
+      LocalDateTime occurredAt = now.minusDays(i);
       sut.save(new CommentNotification("id-" + i, userId, COMMENT, occurredAt,
           now, now, ninetyDaysAfter, postId, writerId, comment, commentId));
     }
@@ -72,10 +71,10 @@ class NotificationRepositoryIntegrationTest extends IntegrationTest {
     CommentNotification notification = (CommentNotification) optionalNotification.orElseThrow();
     assertEquals(notification.getId(), id);
     assertEquals(notification.getUserId(), userId);
-    assertEquals(notification.getOccurredAt().getEpochSecond(), now.getEpochSecond());
-    assertEquals(notification.getCreatedAt().getEpochSecond(), now.getEpochSecond());
-    assertEquals(notification.getLastUpdatedAt().getEpochSecond(), now.getEpochSecond());
-    assertEquals(notification.getDeletedAt().getEpochSecond(), ninetyDaysAfter.getEpochSecond());
+    assertEquals(notification.getOccurredAt().withNano(0), now.withNano(0));
+    assertEquals(notification.getCreatedAt().withNano(0), now.withNano(0));
+    assertEquals(notification.getLastUpdatedAt().withNano(0), now.withNano(0));
+    assertEquals(notification.getDeletedAt().withNano(0), ninetyDaysAfter.withNano(0));
     assertEquals(notification.getPostId(), postId);
     assertEquals(notification.getWriterId(), writerId);
     assertEquals(notification.getComment(), comment);
@@ -134,7 +133,7 @@ class NotificationRepositoryIntegrationTest extends IntegrationTest {
     Slice<Notification> firstResult = sut.findAllByUserIdAndOccurredAtLessThanOrderByOccurredAtDesc(userId, now, pageable);
     Notification last = firstResult.getContent().get(2);
 
-    Instant pivot = last.getOccurredAt();
+    LocalDateTime pivot = last.getOccurredAt();
     Slice<Notification> secondResult = sut.findAllByUserIdAndOccurredAtLessThanOrderByOccurredAtDesc(userId, pivot, pageable);
 
     assertEquals(2, secondResult.getContent().size());

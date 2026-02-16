@@ -1,6 +1,6 @@
 package com.a.domain;
 
-import java.time.Instant;
+import java.time.LocalDateTime;
 import lombok.Getter;
 import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -19,10 +19,10 @@ public class CommentNotification extends Notification{
       String id,
       Long userId,
       NotificationType type,
-      Instant occurredAt,
-      Instant createdAt,
-      Instant lastUpdatedAt,
-      Instant deletedAt,
+      LocalDateTime occurredAt,
+      LocalDateTime createdAt,
+      LocalDateTime lastUpdatedAt,
+      LocalDateTime deletedAt,
       Long postId,
       Long writerId,
       String  comment,

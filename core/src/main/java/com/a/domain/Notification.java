@@ -1,6 +1,6 @@
 package com.a.domain;
 
-import java.time.Instant;
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,8 +19,8 @@ public abstract class Notification {
   public Long userId;
   public NotificationType type;
 
-  public Instant occurredAt;           // 알림 대상인 실제 이벤트가 발생한 시간
-  public Instant createdAt;             // 알림 생성된 시간
-  public Instant lastUpdatedAt;
-  public Instant deletedAt;           // 알림이 삭제될 시간
+  public LocalDateTime occurredAt;           // 알림 대상인 실제 이벤트가 발생한 시간
+  public LocalDateTime createdAt;             // 알림 생성된 시간
+  public LocalDateTime lastUpdatedAt;
+  public LocalDateTime deletedAt;           // 알림이 삭제될 시간
 }

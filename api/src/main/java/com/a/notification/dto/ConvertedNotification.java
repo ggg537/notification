@@ -1,7 +1,7 @@
 package com.a.notification.dto;
 
 import com.a.domain.NotificationType;
-import java.time.Instant;
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -10,6 +10,6 @@ import lombok.Getter;
 public abstract class ConvertedNotification {
   protected String id;
   protected NotificationType type;
-  protected Instant occurredAt;
-  protected Instant lastUpdatedAt;
+  protected LocalDateTime occurredAt;
+  protected LocalDateTime lastUpdatedAt;
 }

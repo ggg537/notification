@@ -10,7 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Slf4j
@@ -80,7 +80,7 @@ public class AccountDeletionService {
         passwordResetTokenRepository.deleteAllByUserId(userId);
 
         // 소프트 삭제 처리
-        user.setDeletedAt(Instant.now());
+        user.setDeletedAt(LocalDateTime.now());
         userRepository.save(user);
 
         // Redis 데이터 정리

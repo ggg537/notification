@@ -2,7 +2,7 @@ package com.a.notification.dto;
 
 import com.a.domain.NotificationType;
 import io.swagger.v3.oas.annotations.media.Schema;
-import java.time.Instant;
+import java.time.LocalDateTime;
 import lombok.Getter;
 
 @Getter
@@ -18,7 +18,7 @@ public class FollowUserNotificationResponse extends UserNotificationResponse {
   @Schema(description = "팔로우 여부")
   private final boolean isFollowing;
 
-  public FollowUserNotificationResponse(String id, NotificationType type, Instant occurredAt, String userName,
+  public FollowUserNotificationResponse(String id, NotificationType type, LocalDateTime occurredAt, String userName,
       String userProfileImageUrl, boolean isFollowing) {
     super(id, type, occurredAt);
     this.userName = userName;

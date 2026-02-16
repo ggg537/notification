@@ -1,13 +1,13 @@
 package com.a.bookmark.dto;
 
 import com.a.entity.BookmarkEntity;
-import java.time.Instant;
+import java.time.LocalDateTime;
 
 public record BookmarkResponse(
     Long id,
     Long postId,
     Long collectionId,
-    Instant createdAt
+    LocalDateTime createdAt
 ) {
     public static BookmarkResponse from(BookmarkEntity entity) {
         return new BookmarkResponse(

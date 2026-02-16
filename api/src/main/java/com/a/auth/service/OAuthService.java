@@ -17,7 +17,8 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
 
-import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Map;
 
 @Slf4j
@@ -208,7 +209,7 @@ public class OAuthService {
         RefreshTokenEntity entity = RefreshTokenEntity.builder()
             .userId(userId)
             .token(token)
-            .expiresAt(Instant.now().plusMillis(expirationMs))
+            .expiresAt(LocalDateTime.now().plus(expirationMs, ChronoUnit.MILLIS))
             .build();
         refreshTokenRepository.save(entity);
 

@@ -1,7 +1,7 @@
 package com.a.notification.dto;
 
 import com.a.domain.NotificationType;
-import java.time.Instant;
+import java.time.LocalDateTime;
 import lombok.Getter;
 
 @Getter
@@ -14,8 +14,8 @@ public class ConvertedFollowNotification extends ConvertedNotification {
   public ConvertedFollowNotification(
       String id,
       NotificationType type,
-      Instant occurredAt,
-      Instant lastUpdatedAt,
+      LocalDateTime occurredAt,
+      LocalDateTime lastUpdatedAt,
       String userName,
       String userProfileImageUrl,
       boolean isFollowing

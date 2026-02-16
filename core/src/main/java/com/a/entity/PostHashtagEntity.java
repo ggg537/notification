@@ -7,7 +7,6 @@ import lombok.*;
 @Table(name = "post_hashtags",
     uniqueConstraints = @UniqueConstraint(columnNames = {"postId", "hashtagId"}))
 @Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder

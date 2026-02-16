@@ -1,7 +1,7 @@
 package com.a.notification.service;
 
 import com.a.service.NotificationGetService;
-import java.time.Instant;
+import java.time.LocalDateTime;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -13,12 +13,12 @@ public class CheckNewNotificationService {
   private final LastReadAtService lastReadAtService;
 
   public boolean checkNewNotification(long userId) {
-    Instant latestUpdatedAt = notificationGetService.getLatestUpdatedAt(userId);
+    LocalDateTime latestUpdatedAt = notificationGetService.getLatestUpdatedAt(userId);
     if (latestUpdatedAt == null) {
       return false;
     }
 
-    Instant lastReadAt = lastReadAtService.getLastReadAt(userId);
+    LocalDateTime lastReadAt = lastReadAtService.getLastReadAt(userId);
     if (lastReadAt == null) {
       return true;
     }

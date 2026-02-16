@@ -2,7 +2,7 @@ package com.a.post.dto;
 
 import com.a.entity.PostEntity;
 import com.a.entity.PostVisibility;
-import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public record PostResponse(
@@ -21,7 +21,7 @@ public record PostResponse(
     boolean isFollowing,
     boolean isOwnPost,
     List<String> tags,
-    Instant createdAt
+    LocalDateTime createdAt
 ) {
     public static PostResponse from(
         PostEntity entity,

@@ -2,7 +2,7 @@ package com.a.post.dto;
 
 import com.a.entity.PostEntity;
 import com.a.entity.PostVisibility;
-import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public record PostDetailResponse(
@@ -20,7 +20,7 @@ public record PostDetailResponse(
     boolean bookmarked,
     boolean isOwner,
     List<String> tags,
-    Instant createdAt
+    LocalDateTime createdAt
 ) {
     public static PostDetailResponse from(
         PostEntity entity,

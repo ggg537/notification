@@ -1,6 +1,6 @@
 package com.a.domain;
 
-import java.time.Instant;
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -11,6 +11,6 @@ public class Comment {
   private Long id;
   private Long userId;
   private String content;
-  private Instant createdAt;
+  private LocalDateTime createdAt;
 
 }

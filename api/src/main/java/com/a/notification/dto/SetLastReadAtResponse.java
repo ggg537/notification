@@ -1,7 +1,7 @@
 package com.a.notification.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import java.time.Instant;
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -11,5 +11,5 @@ import lombok.Getter;
 public class SetLastReadAtResponse {
 
   @Schema(description = "기록된 읽은 시간")
-  private Instant lastReadAt;
+  private LocalDateTime lastReadAt;
 }

@@ -3,7 +3,7 @@ package com.a.notification.dto;
 import com.a.domain.NotificationType;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
-import java.time.Instant;
+import java.time.LocalDateTime;
 
 @Getter
 @Schema(description = "좋아요 알림 응답")
@@ -21,7 +21,7 @@ public class LikeUserNotificationResponse extends UserNotificationResponse {
   @Schema(description = "게시글 이미지")
   private final String postImageUrl;
 
-  public LikeUserNotificationResponse(String id, NotificationType type, Instant occurredAt, String userName,
+  public LikeUserNotificationResponse(String id, NotificationType type, LocalDateTime occurredAt, String userName,
       String userProfileImage, long userCount, String postImageUrl) {
     super(id, type, occurredAt);
     this.userName = userName;

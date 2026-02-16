@@ -8,7 +8,7 @@ import com.a.client.PostClient;
 import com.a.domain.LikeNotification;
 import com.a.domain.Notification;
 import com.a.event.LikeEvent;
-import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -40,7 +40,7 @@ public class LikeRemoveTask {
 
   private void removeLikerAndUpdateNotification(LikeNotification notification, LikeEvent event){
 
-    notification.removeLiker(event.getUserId(), Instant.now());
+    notification.removeLiker(event.getUserId(), LocalDateTime.now());
 
     if (notification.getLikerIds().isEmpty()) {
       removeService.deleteById(notification.getId());

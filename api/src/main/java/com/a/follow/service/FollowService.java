@@ -13,7 +13,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Service
@@ -58,7 +58,7 @@ public class FollowService {
             event.setType(FollowEventType.REMOVE);
             event.setUserId(followerId);
             event.setTargetUserId(followingId);
-            event.setCreatedAt(Instant.now());
+            event.setCreatedAt(LocalDateTime.now());
             kafkaTemplate.send("follow", event);
 
             redisFeedCacheRepository.evictUserFeed(followerId);
@@ -77,7 +77,7 @@ public class FollowService {
             event.setType(FollowEventType.ADD);
             event.setUserId(followerId);
             event.setTargetUserId(followingId);
-            event.setCreatedAt(Instant.now());
+            event.setCreatedAt(LocalDateTime.now());
             kafkaTemplate.send("follow", event);
 
             redisFeedCacheRepository.evictUserFeed(followerId);

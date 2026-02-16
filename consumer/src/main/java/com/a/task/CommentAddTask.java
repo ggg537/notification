@@ -10,8 +10,7 @@ import com.a.domain.CommentNotification;
 import com.a.domain.Notification;
 import com.a.domain.NotificationType;
 import com.a.event.CommentEvent;
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
+import java.time.LocalDateTime;
 import java.util.Objects;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +44,7 @@ public class CommentAddTask {
 
   // 댓글 알림을 생성하는 함수
   private Notification createNotification(Post post, Comment comment){
-    Instant now = Instant.now();
+    LocalDateTime now = LocalDateTime.now();
 
     return new CommentNotification(
         NotificationIdGenerator.generate(),
@@ -54,7 +53,7 @@ public class CommentAddTask {
         comment.getCreatedAt(),
         now,
         now,
-        now.plus(90, ChronoUnit.DAYS),
+        now.plusDays(90),
         post.getId(),
         comment.getUserId(),
         comment.getContent(),

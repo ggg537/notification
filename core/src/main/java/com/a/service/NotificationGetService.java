@@ -3,7 +3,7 @@ package com.a.service;
 import com.a.repository.NotificationRepository;
 import com.a.domain.Notification;
 import com.a.domain.NotificationType;
-import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -30,7 +30,7 @@ public class NotificationGetService {
     return repository.findByTypeAndUserIdAndFollowerId(type, userId, followerId);
   }
 
-  public Instant getLatestUpdatedAt(long userId) {
+  public LocalDateTime getLatestUpdatedAt(long userId) {
     Optional<Notification> notification = repository.findFirstByUserIdOrderByLastUpdatedAtDesc(userId);
     if (notification.isEmpty()) {
       return null;

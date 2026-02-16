@@ -2,7 +2,7 @@ package com.a.notification.controller;
 
 import com.a.notification.dto.SetLastReadAtResponse;
 import com.a.notification.service.LastReadAtService;
-import java.time.Instant;
+import java.time.LocalDateTime;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -19,7 +19,7 @@ public class NotificationReadController implements NotificationReadControllerSpe
   @Override
   @PutMapping("/{userId}/read")
   public SetLastReadAtResponse setLastReadAt(@PathVariable(value = "userId") Long userId) {
-    Instant lastReadAt = service.setLastReadAt(userId);
+    LocalDateTime lastReadAt = service.setLastReadAt(userId);
     return new SetLastReadAtResponse(lastReadAt);
   }
 }

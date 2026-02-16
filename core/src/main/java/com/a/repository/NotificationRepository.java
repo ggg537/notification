@@ -2,7 +2,7 @@ package com.a.repository;
 
 import com.a.domain.Notification;
 import com.a.domain.NotificationType;
-import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -31,7 +31,7 @@ public interface NotificationRepository extends MongoRepository<Notification, St
 
   // occurredAt 없는 경우
   Slice<Notification> findAllByUserIdOrderByOccurredAtDesc(long userId, Pageable page);
-  Slice<Notification> findAllByUserIdAndOccurredAtLessThanOrderByOccurredAtDesc(long userId, Instant occurredAt, Pageable page);
+  Slice<Notification> findAllByUserIdAndOccurredAtLessThanOrderByOccurredAtDesc(long userId, LocalDateTime occurredAt, Pageable page);
 
   Optional<Notification> findFirstByUserIdOrderByLastUpdatedAtDesc(long userId);
 }

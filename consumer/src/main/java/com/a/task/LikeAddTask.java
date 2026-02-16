@@ -10,8 +10,7 @@ import com.a.client.PostClient;
 import com.a.domain.LikeNotification;
 import com.a.domain.Notification;
 import com.a.event.LikeEvent;
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
@@ -47,8 +46,8 @@ public class LikeAddTask {
   private Notification createOrUpdateNotification(Post post, LikeEvent event) {
     Optional<Notification> optionalNotification = getService.getNotificationByTypeAndPostId(LIKE, post.getId());
 
-    Instant now = Instant.now();
-    Instant retention = now.plus(90, ChronoUnit.DAYS);
+    LocalDateTime now = LocalDateTime.now();
+    LocalDateTime retention = now.plusDays(90);
 
     if (optionalNotification.isPresent()) {
       // 업데이트
@@ -61,12 +60,12 @@ public class LikeAddTask {
     }
   }
 
-  private Notification updateNotification(LikeNotification notification, LikeEvent event, Instant now, Instant retention){
+  private Notification updateNotification(LikeNotification notification, LikeEvent event, LocalDateTime now, LocalDateTime retention){
     notification.addLiker(event.getUserId(), event.getCreatedAt(), now, retention);
     return notification;
   }
 
-  private Notification createNotification(Post post, LikeEvent event, Instant now, Instant retention){
+  private Notification createNotification(Post post, LikeEvent event, LocalDateTime now, LocalDateTime retention){
     return new LikeNotification(
         NotificationIdGenerator.generate(),
         post.getUserId(),

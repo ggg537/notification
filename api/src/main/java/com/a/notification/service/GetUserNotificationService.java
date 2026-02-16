@@ -10,7 +10,7 @@ import com.a.notification.dto.ConvertedNotification;
 import com.a.notification.dto.GetUserNotificationsResult;
 import com.a.service.NotificationListService;
 import com.a.service.dto.GetUserNotificationsByPivotResult;
-import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -24,7 +24,7 @@ public class GetUserNotificationService {
   private final LikeUserNotificationConverter likeConverter;
   private final FollowNotificationConverter followConverter;
 
-  public GetUserNotificationsResult getUserNotificationByPivot(long userId, Instant pivot) {
+  public GetUserNotificationsResult getUserNotificationByPivot(long userId, LocalDateTime pivot) {
     GetUserNotificationsByPivotResult result = listService.getUserNotificationByPivot(userId, pivot);
 
     List<ConvertedNotification> convertedNotifications = result.getNotifications().stream()

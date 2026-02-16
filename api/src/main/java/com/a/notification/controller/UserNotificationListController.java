@@ -2,7 +2,7 @@ package com.a.notification.controller;
 
 import com.a.notification.dto.UserNotificationListResponse;
 import com.a.notification.service.GetUserNotificationService;
-import java.time.Instant;
+import java.time.LocalDateTime;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,7 +21,7 @@ public class UserNotificationListController implements UserNotificationListContr
   @GetMapping("/{userId}")
   public UserNotificationListResponse getNotifications(
       @PathVariable(value = "userId") Long userId,
-      @RequestParam(value = "pivot", required = false) Instant pivot
+      @RequestParam(value = "pivot", required = false) LocalDateTime pivot
   ) {
     return UserNotificationListResponse.of(
         getUserNotificationService.getUserNotificationByPivot(userId, pivot)

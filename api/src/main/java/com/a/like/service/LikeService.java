@@ -12,7 +12,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Service
@@ -49,7 +49,7 @@ public class LikeService {
             event.setType(LikeEventType.REMOVE);
             event.setPostId(postId);
             event.setUserId(userId);
-            event.setCreatedAt(Instant.now());
+            event.setCreatedAt(LocalDateTime.now());
             kafkaTemplate.send("like", event);
 
             return false;
@@ -65,7 +65,7 @@ public class LikeService {
             event.setType(LikeEventType.ADD);
             event.setPostId(postId);
             event.setUserId(userId);
-            event.setCreatedAt(Instant.now());
+            event.setCreatedAt(LocalDateTime.now());
             kafkaTemplate.send("like", event);
 
             return true;

@@ -1,7 +1,7 @@
 package com.a.comment.dto;
 
 import com.a.entity.CommentEntity;
-import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public record CommentResponse(
@@ -11,7 +11,7 @@ public record CommentResponse(
     String authorHandle,
     String authorProfileImageUrl,
     String content,
-    Instant createdAt,
+    LocalDateTime createdAt,
     boolean isOwner,
     Long parentId,
     int depth,
